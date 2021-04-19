@@ -28,17 +28,32 @@ class vis_cursor(pygame.sprite.Sprite):
 
     def update(self):
         x, y = pygame.mouse.get_pos()
-        self.rect.center = (x, y)
+        self.rect.topleft = (x, y)
+
+    def check_click(self, mouse):
+        pass
 
 
 class vis_cell(pygame.sprite.Sprite):
-    def __init__(self):
+    def __init__(self, x, y):
         pygame.sprite.Sprite.__init__(self)
         self.image = cell_img
         self.image.set_colorkey(BLACK)
         self.mask = pygame.mask.from_surface(self.image)
         self.rect = self.image.get_rect()
-        self.rect.center = (WIDTH / 2, HEIGHT / 2)
+        if x == 0 and y == 0:
+            self.rect.center = (WIDTH / 2, HEIGHT / 2)
+        else:
+            self.rect.center = (x, y)
+        self.count = 0
+
+    def local_coords(self, point):
+        return (point[0] - self.rect.left, point[1] - self.rect.top)
+
+    def check_click(self, mouse):
+        if self.rect.collidepoint(mouse) and self.mask.get_at(self.local_coords(mouse)) == 1:
+            print("HOLA" + str(self.count))
+            self.count = self.count + 1
 
     # def update(self):
     #     ms = pygame.mouse.get_pos()
@@ -61,15 +76,18 @@ clock = pygame.time.Clock()
 
 all_sprites = pygame.sprite.Group()
 
-cell_img = pygame.image.load(os.path.join(game_folder, 'hex1-res1.png')).convert()
+cell_img = pygame.image.load(os.path.join(game_folder, 'hex1-res2.png')).convert()
 cursor_img = pygame.image.load(os.path.join(game_folder, 'cursor1_rs2.png')).convert()
-cell = vis_cell()
+cell = vis_cell(100, 100)
+cell2 = vis_cell(148, 129)
 cursor = vis_cursor()
 
 cell_group = pygame.sprite.AbstractGroup()
 cell_group.add(cell)
+cell_group.add(cell2)
 
 all_sprites.add(cell)
+all_sprites.add(cell2)
 all_sprites.add(cursor)
 
 # Цикл игры
@@ -89,8 +107,8 @@ while running:
         if event.type == pygame.MOUSEBUTTONUP:
             x, y = event.pos
 
-            if pygame.sprite.spritecollide(cursor, cell_group, False, pygame.sprite.collide_mask):
-                print("HOLA")
+            for sprite in all_sprites:
+                sprite.check_click(event.pos)
             # for box in all_sprites:
             #     print(box.)
             #     if box.rect.collidepoint(x, y):
