@@ -15,7 +15,7 @@ RED = (255, 0, 0)
 GREEN = (0, 255, 0)
 BLUE = (0, 0, 255)
 
-game_folder = os.path.dirname(".")
+game_folder = os.path.dirname("../")
 
 class vis_cursor(pygame.sprite.Sprite):
     def __init__(self):
@@ -76,8 +76,8 @@ clock = pygame.time.Clock()
 
 all_sprites = pygame.sprite.Group()
 
-cell_img = pygame.image.load(os.path.join(game_folder, 'hex1-res2.png')).convert()
-cursor_img = pygame.image.load(os.path.join(game_folder, 'cursor1_rs2.png')).convert()
+cell_img = pygame.image.load(os.path.join(game_folder, 'res/hex1-res2.png')).convert()
+cursor_img = pygame.image.load(os.path.join(game_folder, 'res/cursor1_rs2.png')).convert()
 cell = vis_cell(100, 100)
 cell2 = vis_cell(148, 129)
 cursor = vis_cursor()
