@@ -13,6 +13,7 @@ class vis_cursor(pygame.sprite.Sprite):
         self.mask = pygame.mask.from_surface(self.image)
         self.rect = self.image.get_rect()
         self.rect.center = (WIDTH / 2, HEIGHT / 2)
+        self._layer = 2
 
     def update(self):
         x, y = pygame.mouse.get_pos()

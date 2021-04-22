@@ -3,6 +3,7 @@ import os
 
 from src.visual.vis_cursor import vis_cursor
 from src.visual.vis_cell import vis_cell
+from src.visual.vis_map import vis_map
 
 WIDTH = 800
 HEIGHT = 650
@@ -23,21 +24,20 @@ screen = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("My Game")
 clock = pygame.time.Clock()
 
-all_sprites = pygame.sprite.Group()
+all_sprites = pygame.sprite.LayeredUpdates()
 
 cell_img = pygame.image.load(os.path.join(game_folder, 'res/hex1-res2.png')).convert()
 cursor_img = pygame.image.load(os.path.join(game_folder, 'res/cursor1_rs2.png')).convert()
-cell = vis_cell(100, 100, cell_img)
-cell2 = vis_cell(148, 129, cell_img)
+
+map = vis_map()
+map.set_size(20, 8, cell_img)
+
 cursor = vis_cursor(cursor_img)
 
-cell_group = pygame.sprite.AbstractGroup()
-cell_group.add(cell)
-cell_group.add(cell2)
-
-all_sprites.add(cell)
-all_sprites.add(cell2)
 all_sprites.add(cursor)
+for line in map.get_cells():
+    for cell in line:
+        all_sprites.add(cell)
 
 running = True
 it = 0
