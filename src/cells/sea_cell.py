@@ -1,4 +1,4 @@
-from cell import Cell
+from src.cell import Cell
 
 class Sea_cell(Cell):
 

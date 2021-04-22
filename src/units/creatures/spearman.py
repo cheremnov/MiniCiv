@@ -1,4 +1,4 @@
-from units.creature import Creature
+from src.units.creature import Creature
 
 class Spearman(Creature):
 

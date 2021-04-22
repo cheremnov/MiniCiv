@@ -1,5 +1,5 @@
-from units.building import Building
-from units.creatures.spearman import Spearman
+from src.units.building import Building
+from src.units.creatures.spearman import Spearman
 
 class Town_hall(Building):
 
