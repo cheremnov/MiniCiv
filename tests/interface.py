@@ -63,7 +63,7 @@ blue_score_button = vis_button(740, 310, 'Blue Score', button_img)
 all_sprites.add(blue_score_button)
 
 frame_img = pygame.image.load(os.path.join(game_folder, 'res/frame_global4.png')).convert()
-global_frame = vis_frame(360, 325, frame_img)
+global_frame = vis_frame(360, 325, frame_img, gamemap)
 all_sprites.add(global_frame)
 
 running = True
@@ -81,11 +81,22 @@ while running:
         if event.type == pygame.QUIT:
             running = False
 
-        if event.type == pygame.MOUSEBUTTONUP:
+        if event.type == pygame.MOUSEBUTTONDOWN:
             x, y = event.pos
-
+            if event.button == 1:
+                for sprite in all_sprites:
+                    sprite.check_click(event.pos)
+            elif event.button == 3:
+                for sprite in all_sprites:
+                    sprite.check_right_click(event.pos)
+        elif event.type == pygame.MOUSEMOTION:
             for sprite in all_sprites:
-                sprite.check_click(event.pos)
+                sprite.check_motion(event.rel)
+        elif event.type == pygame.MOUSEBUTTONUP:
+            x, y = event.pos
+            if event.button == 3:
+                for sprite in all_sprites:
+                    sprite.check_right_release(event.pos)
 
     all_sprites.update()
 

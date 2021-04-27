@@ -7,6 +7,7 @@ class vis_map:
         self.cells = []
         self.x = 0
         self.y = 0
+        self.moving = False
 
     def set_size(self, x, y, img):
         self.x = x
@@ -46,5 +47,14 @@ class vis_map:
         if x < self.x - 1 and y < self.y - 1:
             cells.append(self.cells[x + 1][y + 1])
         return cells
+
+    def set_moving(self, moving):
+        self.moving = moving
+
+    def move(self, move):
+        if self.moving == True:
+            for list in self.cells:
+                for cell in list:
+                    cell.move(move)
 
 

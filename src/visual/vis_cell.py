@@ -21,8 +21,20 @@ class vis_cell(pygame.sprite.Sprite):
             print("HOLA" + str(self.count))
             self.count = self.count + 1
 
+    def check_right_click(self, mouse):
+        pass
+
+    def check_right_release(self, mouse):
+        pass
+
+    def check_motion(self, rel):
+        pass
+
     def x_size(self):
         return self.rect.right - self.rect.left
 
     def y_size(self):
         return self.rect.bottom - self.rect.top
+
+    def move(self, move):
+        self.rect.center = (self.rect.center[0] + move[0], self.rect.center[1] + move[1])

@@ -21,3 +21,12 @@ class vis_cursor(pygame.sprite.Sprite):
 
     def check_click(self, mouse):
         pass
+
+    def check_right_click(self, mouse):
+        pass
+
+    def check_right_release(self, mouse):
+        pass
+
+    def check_motion(self, rel):
+        pass

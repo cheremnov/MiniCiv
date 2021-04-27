@@ -28,6 +28,15 @@ class vis_button(pg.sprite.Sprite):
         if self.rect.collidepoint(mouse) and self.mask.get_at(self.local_coords(mouse)) == 1:
             self.action()
 
+    def check_right_click(self, mouse):
+        pass
+
+    def check_right_release(self, mouse):
+        pass
+
+    def check_motion(self, rel):
+        pass
+
     def action(self):
         print ('NOT IMPLEMENTED YET')
 
