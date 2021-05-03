@@ -2,22 +2,15 @@ import pygame
 
 BLACK = (0, 0, 0)
 
-WIDTH = 800
-HEIGHT = 650
-
-class vis_cursor(pygame.sprite.Sprite):
-    def __init__(self, cursor_img):
+class vis_unit(pygame.sprite.Sprite):
+    def __init__(self, unit_img):
         pygame.sprite.Sprite.__init__(self)
-        self.image = cursor_img
+        self.image = unit_img
         self.image.set_colorkey(BLACK)
         self.mask = pygame.mask.from_surface(self.image)
         self.rect = self.image.get_rect()
-        self.rect.center = (WIDTH / 2, HEIGHT / 2)
-        self._layer = 4
-
-    def update(self):
-        x, y = pygame.mouse.get_pos()
-        self.rect.topleft = (x, y)
+        self.rect.center = (0, 0)
+        self._layer = 2
 
     def check_click(self, mouse):
         pass
@@ -30,3 +23,6 @@ class vis_cursor(pygame.sprite.Sprite):
 
     def check_motion(self, rel):
         pass
+
+    def set_center(self, x, y):
+        self.rect.center = (x, y)

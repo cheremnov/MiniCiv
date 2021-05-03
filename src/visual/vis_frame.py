@@ -14,7 +14,7 @@ class vis_frame(pg.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.rect.center = (x, y)
         self.map = game_map
-        self._layer = 1
+        self._layer = 3
 
     def local_coords(self, point):
         return (point[0] - self.rect.left, point[1] - self.rect.top)

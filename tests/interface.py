@@ -6,6 +6,7 @@ from src.visual.vis_cell import vis_cell
 from src.visual.vis_map import vis_map
 from src.visual.vis_button import vis_button
 from src.visual.vis_frame import vis_frame
+from src.visual.vis_unit import vis_unit
 
 WIDTH = 800
 HEIGHT = 650
@@ -45,6 +46,11 @@ all_sprites.add(cursor)
 for line in gamemap.get_cells():
     for cell in line:
         all_sprites.add(cell)
+
+spearman_img = pygame.image.load(os.path.join(game_folder, 'res/spearman.png')).convert()
+spearman = vis_unit(spearman_img)
+gamemap.get_cells()[0][0].set_unit(spearman)
+all_sprites.add(spearman)
 
 button_img = pygame.image.load(os.path.join(game_folder, 'res/frame_button1.png')).convert()
 reset_map_button = vis_button(740, 50, 'Reset map', button_img)

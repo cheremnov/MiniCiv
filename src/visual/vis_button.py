@@ -14,7 +14,7 @@ class vis_button(pg.sprite.Sprite):
         self.mask = pg.mask.from_surface(self.image)
         self.rect = self.image.get_rect()
         self.rect.center = (x, y)
-        self._layer = 1
+        self._layer = 3
         if font is None:
             font = pg.freetype.SysFont('Comic Sans MS', 16)
         self.font = font

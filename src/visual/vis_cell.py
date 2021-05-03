@@ -1,5 +1,7 @@
 import pygame
 
+from src.visual.vis_unit import vis_unit
+
 BLACK = (0, 0, 0)
 
 class vis_cell(pygame.sprite.Sprite):
@@ -12,6 +14,7 @@ class vis_cell(pygame.sprite.Sprite):
         self.rect.center = (x, y)
         self._layer = 1
         self.count = 0
+        self.unit = None
 
     def local_coords(self, point):
         return (point[0] - self.rect.left, point[1] - self.rect.top)
@@ -38,3 +41,9 @@ class vis_cell(pygame.sprite.Sprite):
 
     def move(self, move):
         self.rect.center = (self.rect.center[0] + move[0], self.rect.center[1] + move[1])
+        if self.unit != None:
+            self.unit.set_center(self.rect.centerx, self.rect.centery)
+
+    def set_unit(self, unit):
+        self.unit = unit
+        self.unit.set_center(self.rect.centerx, self.rect.centery)
