@@ -59,7 +59,6 @@ all_sprites.add(reset_map_button)
 button_img = pygame.image.load(os.path.join(game_folder, 'res/frame_button1.png')).convert()
 end_turn_button = vis_button(740, 180, 'End turn', button_img)
 all_sprites.add(end_turn_button)
-
 button_img = pygame.image.load(os.path.join(game_folder, 'res/frame_button1.png')).convert()
 red_score_button = vis_button(740, 245, 'Red Score', button_img)
 all_sprites.add(red_score_button)

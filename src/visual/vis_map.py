@@ -19,7 +19,7 @@ class vis_map:
             for j in range(0, y):
                 if i % 2 == 1 and j == y - 1:
                     continue
-                cell = vis_cell(coord_x, coord_y, img)
+                cell = vis_cell(coord_x, coord_y, img, self)
                 coord_x = coord_x + cell.x_size() * 3 // 2
                 list.append(cell)
             if i % 2 == 0:
