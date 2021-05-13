@@ -44,13 +44,14 @@ cursor_img = pygame.image.load(os.path.join(game_folder, 'res/cursor1_rs2.png'))
 
 gamemap = vis_map()
 gamemap.set_size(20, 7, cell_img)
+gamemap.gen_terrain()
 
 cursor = vis_cursor(cursor_img)
 
 all_sprites.add(cursor)
 for line in gamemap.get_cells():
     for cell in line:
-        all_sprites.add(cell)
+        all_sprites.add(cell.vis_cell)
 
 red_stat = Country_stat(RED)
 blue_stat = Country_stat(BLUE)
@@ -60,17 +61,29 @@ blue_stat.set_capital((5, 5), gamemap)
 red_stat.gen_unit_loc(3, 1, gamemap)
 blue_stat.gen_unit_loc(3, 1, gamemap)
 
+# Water generation phase
+banned_cells = set()
+banned_cells.add(red_stat.get_capital())
+banned_cells.add(blue_stat.get_capital())
+for unit in red_stat.get_units():
+    banned_cells.add(unit.get_cell())
+for unit in blue_stat.get_units():
+    banned_cells.add(unit.get_cell())
+gamemap.gen_water(banned_cells)
+
 spearman_img = pygame.image.load(os.path.join
                                  (game_folder, 'res/spearman.png')).convert()
 for unit in red_stat.get_units():
     unit.add_vis_unit(spearman_img)
     unit_cell = unit.get_cell()
-    gamemap.get_cells()[unit_cell[0]][unit_cell[1]].set_unit(unit.vis_unit)
+    gamemap.get_cells()[unit_cell[0]][unit_cell[1]].\
+        vis_cell.set_unit(unit.vis_unit)
     all_sprites.add(unit.vis_unit)
 for unit in blue_stat.get_units():
     unit.add_vis_unit(spearman_img)
     unit_cell = unit.get_cell()
-    gamemap.get_cells()[unit_cell[0]][unit_cell[1]].set_unit(unit.vis_unit)
+    gamemap.get_cells()[unit_cell[0]][unit_cell[1]].\
+        vis_cell.set_unit(unit.vis_unit)
     all_sprites.add(unit.vis_unit)
 
 button_img = pygame.image.load(os.path.join(game_folder, 'res/frame_button1.png')).convert()
