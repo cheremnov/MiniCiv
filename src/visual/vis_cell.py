@@ -1,8 +1,7 @@
 import pygame
 
-from src.visual.vis_unit import vis_unit
-
 BLACK = (0, 0, 0)
+
 
 class vis_cell(pygame.sprite.Sprite):
     def __init__(self, x, y, cell_img, map):
@@ -25,11 +24,11 @@ class vis_cell(pygame.sprite.Sprite):
             if self.unit == None:
                 for line in self.map.get_cells():
                     for cell in line:
-                        if cell.get_unit() != None and cell.get_unit().moving() == True:
-                            self.set_unit(cell.get_unit())
+                        if cell.vis_cell.get_unit() != None and cell.vis_cell.get_unit().moving() == True:
+                            self.set_unit(cell.vis_cell.get_unit())
                             self.unit.set_move(False)
                             self.unit.set_skip(True)
-                            cell.set_unit(None)
+                            cell.vis_cell.set_unit(None)
 
     def check_right_click(self, mouse):
         pass
@@ -58,3 +57,8 @@ class vis_cell(pygame.sprite.Sprite):
 
     def get_unit(self):
         return self.unit
+
+    def update_image(self, cell_img):
+        self.image = cell_img
+        self.image.set_colorkey(BLACK)
+        self.mask = pygame.mask.from_surface(self.image)

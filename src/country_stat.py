@@ -14,6 +14,9 @@ class Country_stat:
         assert(vis_map.in_bounds(capital_coords[0], capital_coords[1]))
         self.capital = capital_coords
 
+    def get_capital(self):
+        return self.capital
+
     def gen_unit_loc(self, units_num, spawn_area_size, vis_map):
         ''' Function generates initial unit locations in the hex map
         Major assumptions:
