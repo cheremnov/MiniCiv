@@ -1,5 +1,6 @@
 import random
 from src.unit import Unit
+from src.units.buildings.town_hall import Town_hall
 
 
 class Country_stat:
@@ -7,12 +8,16 @@ class Country_stat:
     def __init__(self, color):
         self.color = color
         self.resources = 100
+        self.buildings = []
         self.units = []
         self.cells = []
 
     def set_capital(self, capital_coords, vis_map):
         assert(vis_map.in_bounds(capital_coords[0], capital_coords[1]))
         self.capital = capital_coords
+        town_hall = Town_hall()
+        town_hall.set_cell(self.capital)
+        self.add_building(town_hall)
 
     def get_capital(self):
         return self.capital
@@ -23,6 +28,7 @@ class Country_stat:
         1) Every unit belongs to the country
         2) All units spawn in the square over the country capital
         3) If the spawn location is unavailable, they spawn in the capital
+        4) The townhall building is always located in the capital
         This function requires:
         1) The nation must have the capital
         '''
@@ -59,6 +65,18 @@ class Country_stat:
 
     def add_cell(self, cell):
         self.cells.append(cell)
+
+    def add_building(self, building):
+        self.buildings.append(building)
+
+    def remove_building(self, building):
+        self.buildings.remove(building)
+
+    def get_buildings(self):
+        return self.buildings
+
+    def clear_buildings(self):
+        self.buildings = []
 
     def remove_cell(self, cell):
         self.units.remove(cell)
