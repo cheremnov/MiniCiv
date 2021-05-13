@@ -1,5 +1,6 @@
 import pygame
 import os
+import sys
 
 from src.visual.vis_cursor import vis_cursor
 from src.visual.vis_cell import vis_cell
@@ -15,7 +16,7 @@ RED = (255, 0, 0)
 GREEN = (0, 255, 0)
 BLUE = (0, 0, 255)
 
-game_folder = os.path.dirname("../")
+game_folder = os.path.normpath(os.path.join(os.path.dirname(os.path.abspath(__file__)),'..'))
 
 pygame.init()
 pygame.mixer.init()

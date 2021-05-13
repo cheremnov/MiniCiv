@@ -10,6 +10,7 @@ class vis_map:
         self.moving = False
 
     def set_size(self, x, y, img):
+        assert(0 < x and 0 < y)
         self.x = x
         self.y = y
         coord_x = START_COORD + 5
@@ -28,6 +29,8 @@ class vis_map:
                 coord_x = START_COORD + 5
             coord_y = coord_y + list[0].y_size() // 2
             self.cells.append(list)
+        self.width = len(self.cells[0])
+        self.height = len(self.cells)
 
     def get_cells(self):
         return self.cells
@@ -57,4 +60,5 @@ class vis_map:
                 for cell in list:
                     cell.move(move)
 
-
+    def in_bounds(self, cell_x, cell_y):
+        return 0 <= cell_x < self.width and 0 <= cell_y < self.height

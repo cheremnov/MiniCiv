@@ -1,6 +1,11 @@
 import pygame
 import os
+import sys
+sys.path.append(os.path.normpath(os.path.join
+                (os.path.dirname(os.path.abspath(__file__)), '..')))
 
+from src.country_stat import Country_stat
+from src.unit import Unit
 from src.visual.vis_cursor import vis_cursor
 from src.visual.vis_cell import vis_cell
 from src.visual.vis_map import vis_map
@@ -18,7 +23,7 @@ RED = (255, 0, 0)
 GREEN = (0, 255, 0)
 BLUE = (0, 0, 255)
 
-game_folder = os.path.dirname("../")
+game_folder = os.path.normpath(os.path.join(os.path.dirname(os.path.abspath(__file__)),'..'))
 
 def exit():
     global running
@@ -47,10 +52,26 @@ for line in gamemap.get_cells():
     for cell in line:
         all_sprites.add(cell)
 
-spearman_img = pygame.image.load(os.path.join(game_folder, 'res/spearman.png')).convert()
-spearman = vis_unit(spearman_img)
-gamemap.get_cells()[0][0].set_unit(spearman)
-all_sprites.add(spearman)
+red_stat = Country_stat(RED)
+blue_stat = Country_stat(BLUE)
+red_stat.set_capital((1, 1), gamemap)
+blue_stat.set_capital((5, 5), gamemap)
+
+red_stat.gen_unit_loc(3, 1, gamemap)
+blue_stat.gen_unit_loc(3, 1, gamemap)
+
+spearman_img = pygame.image.load(os.path.join
+                                 (game_folder, 'res/spearman.png')).convert()
+for unit in red_stat.get_units():
+    unit.add_vis_unit(spearman_img)
+    unit_cell = unit.get_cell()
+    gamemap.get_cells()[unit_cell[0]][unit_cell[1]].set_unit(unit.vis_unit)
+    all_sprites.add(unit.vis_unit)
+for unit in blue_stat.get_units():
+    unit.add_vis_unit(spearman_img)
+    unit_cell = unit.get_cell()
+    gamemap.get_cells()[unit_cell[0]][unit_cell[1]].set_unit(unit.vis_unit)
+    all_sprites.add(unit.vis_unit)
 
 button_img = pygame.image.load(os.path.join(game_folder, 'res/frame_button1.png')).convert()
 reset_map_button = vis_button(740, 50, 'Reset map', button_img)
