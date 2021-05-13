@@ -1,3 +1,6 @@
+from src.visual.vis_unit import vis_unit
+
+
 class Unit:
 
     def __init__(self):
@@ -59,3 +62,9 @@ class Unit:
 
     def clear_produced_units(self):
         self.produced_units = set()
+
+    def add_vis_unit(self, unit_img):
+        ''' Not every unit should be drawn
+        Call this function to get the unit sprite
+        '''
+        self.vis_unit = vis_unit(unit_img)
