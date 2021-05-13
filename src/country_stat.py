@@ -38,6 +38,7 @@ class Country_stat:
             for y in range(self.capital[1] - spawn_area_size,
                            self.capital[1] + spawn_area_size):
                 possible_spawns.add((x, y))
+        possible_spawns.discard(self.capital)
         for unit_idx in range(units_num):
             if len(possible_spawns) == 0:
                 spawn_loc = self.capital

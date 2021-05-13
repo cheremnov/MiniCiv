@@ -12,6 +12,7 @@ class vis_unit(pygame.sprite.Sprite):
         self.rect.center = (0, 0)
         self.move = False
         self.skip = False
+        self.immovable = False
         self._layer = 2
 
     def local_coords(self, point):
@@ -46,3 +47,9 @@ class vis_unit(pygame.sprite.Sprite):
 
     def set_skip(self, skip):
         self.skip = skip
+
+    def is_immovable(self):
+        return self.immovable
+
+    def set_immovable(self, immovable):
+        self.immovable = immovable

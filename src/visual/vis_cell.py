@@ -24,7 +24,8 @@ class vis_cell(pygame.sprite.Sprite):
             if self.unit == None:
                 for line in self.map.get_cells():
                     for cell in line:
-                        if cell.vis_cell.get_unit() != None and cell.vis_cell.get_unit().moving() == True:
+                        if cell.vis_cell.get_unit() != None and cell.vis_cell.get_unit().moving() == True\
+                                and cell.vis_cell.get_unit().is_immovable() == False:
                             self.set_unit(cell.vis_cell.get_unit())
                             self.unit.set_move(False)
                             self.unit.set_skip(True)

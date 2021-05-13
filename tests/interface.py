@@ -78,12 +78,14 @@ for building in red_stat.get_buildings():
     building_cell = building.get_cell()
     gamemap.get_cells()[building_cell[0]][building_cell[1]].\
         vis_cell.set_unit(building.vis_unit)
+    building.vis_unit.set_immovable(True)
     all_sprites.add(building.vis_unit)
 for building in blue_stat.get_buildings():
     building.add_vis_unit(townhall_img)
     building_cell = building.get_cell()
     gamemap.get_cells()[building_cell[0]][building_cell[1]].\
         vis_cell.set_unit(building.vis_unit)
+    building.vis_unit.set_immovable(True)
     all_sprites.add(building.vis_unit)
 
 spearman_img = pygame.image.load(os.path.join
