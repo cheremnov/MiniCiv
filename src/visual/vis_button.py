@@ -22,7 +22,7 @@ class vis_button(pg.sprite.Sprite):
         self.image.blit(self.textsurface, (10, 25))
 
     def local_coords(self, point):
-        return (point[0] - self.rect.left, point[1] - self.rect.top)
+        return point[0] - self.rect.left, point[1] - self.rect.top
 
     def check_click(self, mouse):
         if self.rect.collidepoint(mouse) and self.mask.get_at(self.local_coords(mouse)) == 1:
@@ -38,7 +38,7 @@ class vis_button(pg.sprite.Sprite):
         pass
 
     def action(self):
-        print ('NOT IMPLEMENTED YET')
+        print('NOT IMPLEMENTED YET')
 
     def draw_text(self):
         self.textsurface, _ = self.font.render(self.text, (0, 0, 0))

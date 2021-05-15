@@ -5,6 +5,7 @@ BLACK = (0, 0, 0)
 WIDTH = 800
 HEIGHT = 650
 
+
 class vis_cursor(pygame.sprite.Sprite):
     def __init__(self, cursor_img):
         pygame.sprite.Sprite.__init__(self)

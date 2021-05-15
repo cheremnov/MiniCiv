@@ -1,5 +1,4 @@
 import pygame as pg
-from src.visual.vis_map import vis_map
 
 BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
@@ -17,7 +16,7 @@ class vis_frame(pg.sprite.Sprite):
         self._layer = 3
 
     def local_coords(self, point):
-        return (point[0] - self.rect.left, point[1] - self.rect.top)
+        return point[0] - self.rect.left, point[1] - self.rect.top
 
     def check_click(self, mouse):
         if self.rect.collidepoint(mouse) and self.mask.get_at(self.local_coords(mouse)) == 1:

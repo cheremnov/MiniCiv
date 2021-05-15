@@ -1,8 +1,17 @@
 import random
+import pygame
+import os
 from src.cell import Cell
-from src.visual.vis_cell import vis_cell
+from src.country_stat import Country_stat
 
 START_COORD = 60
+WATER_PERCENTAGE = 5
+
+WHITE = (255, 255, 255)
+BLACK = (0, 0, 0)
+RED = (255, 0, 0)
+GREEN = (0, 255, 0)
+BLUE = (0, 0, 255)
 
 
 class vis_map:
@@ -12,7 +21,7 @@ class vis_map:
         self.y = 0
         self.moving = False
 
-    def set_size(self, x, y, img):
+    def set_size(self, x, y):
         assert(0 < x and 0 < y)
         self.x = x
         self.y = y
@@ -49,7 +58,6 @@ class vis_map:
         ''' Capitals can't be under-water, as well as units
         Water is generated randomly, 5% of the map is water
         '''
-        WATER_PERCENTAGE = 5
         possible_water_tiles = set()
         for i in range(0, len(self.cells)):
             for j in range(0, len(self.cells[i])):
@@ -86,30 +94,20 @@ class vis_map:
         self.moving = moving
 
     def move(self, move):
-        if self.moving == True:
-            for list in self.cells:
-                for cell in list:
+        if self.moving is True:
+            for line in self.cells:
+                for cell in line:
                     cell.vis_cell.move(move)
 
     def in_bounds(self, cell_x, cell_y):
         return (0 <= cell_x < len(self.cells)
                 and 0 <= cell_y < len(self.cells[cell_x]))
 
-import pygame
-import os
-from src.country_stat import Country_stat
-
-WHITE = (255, 255, 255)
-BLACK = (0, 0, 0)
-RED = (255, 0, 0)
-GREEN = (0, 255, 0)
-BLUE = (0, 0, 255)
 
 def generate_map(x: int, y: int, game_folder: str) -> vis_map:
-    cell_img = pygame.image.load(os.path.join(game_folder, 'res/hex1-res2.png')).convert()
 
     gamemap = vis_map()
-    gamemap.set_size(x, y, cell_img)
+    gamemap.set_size(x, y)
     gamemap.gen_terrain()
 
     red_stat = Country_stat(RED)
@@ -117,7 +115,8 @@ def generate_map(x: int, y: int, game_folder: str) -> vis_map:
 
     red_capital_coords = (random.randint(1, x - 2), random.randint(1, y - 2))
     blue_capital_coords = (random.randint(1, x - 2), random.randint(1, y - 2))
-    while -2 <= red_capital_coords[0] - blue_capital_coords[0] <= 2 and -2 <= red_capital_coords[1] - blue_capital_coords[1] <= 2:
+    while -2 <= red_capital_coords[0] - blue_capital_coords[0] <= 2 and\
+          -2 <= red_capital_coords[1] - blue_capital_coords[1] <= 2:
         blue_capital_coords = (random.randint(0, x - 1), random.randint(1, y - 2))
     
     red_stat.set_capital(red_capital_coords, gamemap)
@@ -164,4 +163,3 @@ def generate_map(x: int, y: int, game_folder: str) -> vis_map:
         gamemap.get_cells()[unit_cell[0]][unit_cell[1]].\
             vis_cell.set_unit(unit.vis_unit)
     return gamemap
-

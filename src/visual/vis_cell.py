@@ -17,15 +17,15 @@ class vis_cell(pygame.sprite.Sprite):
         self.unit = None
 
     def local_coords(self, point):
-        return (point[0] - self.rect.left, point[1] - self.rect.top)
+        return point[0] - self.rect.left, point[1] - self.rect.top
 
     def check_click(self, mouse):
         if self.rect.collidepoint(mouse) and self.mask.get_at(self.local_coords(mouse)) == 1:
-            if self.unit == None:
+            if self.unit is None:
                 for line in self.map.get_cells():
                     for cell in line:
-                        if cell.vis_cell.get_unit() != None and cell.vis_cell.get_unit().moving() == True\
-                                and cell.vis_cell.get_unit().is_immovable() == False:
+                        if cell.vis_cell.get_unit() is not None and cell.vis_cell.get_unit().moving() is True\
+                                and cell.vis_cell.get_unit().is_immovable() is False:
                             self.set_unit(cell.vis_cell.get_unit())
                             self.unit.set_move(False)
                             self.unit.set_skip(True)
@@ -48,12 +48,12 @@ class vis_cell(pygame.sprite.Sprite):
 
     def move(self, move):
         self.rect.center = (self.rect.center[0] + move[0], self.rect.center[1] + move[1])
-        if self.unit != None:
+        if self.unit is not None:
             self.unit.set_center(self.rect.centerx, self.rect.centery)
 
     def set_unit(self, unit):
         self.unit = unit
-        if self.unit != None:
+        if self.unit is not None:
             self.unit.set_center(self.rect.centerx, self.rect.centery)
 
     def get_unit(self):

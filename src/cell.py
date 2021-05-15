@@ -14,6 +14,7 @@ class Cell:
         self.x = x
         self.y = y
         self.terrain = terrain
+        self.vis_cell = None
 
     def set_terrain(self, terrain):
         self.terrain = terrain

@@ -4,14 +4,10 @@ import sys
 sys.path.append(os.path.normpath(os.path.join
                 (os.path.dirname(os.path.abspath(__file__)), '..')))
 
-from src.country_stat import Country_stat
-from src.unit import Unit
 from src.visual.vis_cursor import vis_cursor
-from src.visual.vis_cell import vis_cell
-from src.visual.vis_map import vis_map, generate_map
+from src.visual.vis_map import generate_map
 from src.visual.vis_button import vis_button
 from src.visual.vis_frame import vis_frame
-from src.visual.vis_unit import vis_unit
 
 WIDTH = 800
 HEIGHT = 650
@@ -23,11 +19,13 @@ RED = (255, 0, 0)
 GREEN = (0, 255, 0)
 BLUE = (0, 0, 255)
 
-game_folder = os.path.normpath(os.path.join(os.path.dirname(os.path.abspath(__file__)),'..'))
+game_folder = os.path.normpath(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..'))
+
 
 def exit():
     global running
     running = False
+
 
 def reset_map():
     global gamemap
@@ -36,10 +34,11 @@ def reset_map():
     global global_frame
     global_frame.map = gamemap
 
+
 pygame.init()
 pygame.font.init()
 pygame.mixer.init()
-pygame.mouse.set_cursor((8,8),(0,0),(0,0,0,0,0,0,0,0),(0,0,0,0,0,0,0,0))
+pygame.mouse.set_cursor((8, 8), (0, 0), (0, 0, 0, 0, 0, 0, 0, 0), (0, 0, 0, 0, 0, 0, 0, 0))
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("My Game with basic interface")
 clock = pygame.time.Clock()

@@ -9,6 +9,7 @@ class Unit:
         self.cur_hp = -1
         self.damage = -1
         self.income = -1
+        self.vis_unit = None
         self.possible_cells = set()
         self.produced_units = set()
 

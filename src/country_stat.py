@@ -8,6 +8,7 @@ class Country_stat:
     def __init__(self, color):
         self.color = color
         self.resources = 100
+        self.capital = (-1, -1)
         self.buildings = []
         self.units = []
         self.cells = []
@@ -98,7 +99,7 @@ class Country_stat:
         self.resources = resources
 
     def change_resources(self, add):
-        resources = self.resources + add
+        self.resources = self.resources + add
 
     def get_income(self):
         income = 0

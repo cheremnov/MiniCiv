@@ -2,6 +2,7 @@ import pygame
 
 BLACK = (0, 0, 0)
 
+
 class vis_unit(pygame.sprite.Sprite):
     def __init__(self, unit_img):
         pygame.sprite.Sprite.__init__(self)
@@ -16,10 +17,10 @@ class vis_unit(pygame.sprite.Sprite):
         self._layer = 2
 
     def local_coords(self, point):
-        return (point[0] - self.rect.left, point[1] - self.rect.top)
+        return point[0] - self.rect.left, point[1] - self.rect.top
 
     def check_click(self, mouse):
-        if self.skip == True:
+        if self.skip is True:
             self.skip = False
             return
         if self.rect.collidepoint(mouse) and self.mask.get_at(self.local_coords(mouse)) == 1:
