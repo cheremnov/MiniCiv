@@ -12,7 +12,6 @@ class vis_unit(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.rect.center = (0, 0)
         self.move = False
-        self.skip = False
         self.immovable = False
         self._layer = 2
 
@@ -20,13 +19,7 @@ class vis_unit(pygame.sprite.Sprite):
         return point[0] - self.rect.left, point[1] - self.rect.top
 
     def check_click(self, mouse):
-        if self.skip is True:
-            self.skip = False
-            return
-        if self.rect.collidepoint(mouse) and self.mask.get_at(self.local_coords(mouse)) == 1:
-            self.move = not self.move
-        else:
-            self.move = False
+        pass
 
     def check_right_click(self, mouse):
         pass
@@ -45,9 +38,6 @@ class vis_unit(pygame.sprite.Sprite):
 
     def moving(self):
         return self.move
-
-    def set_skip(self, skip):
-        self.skip = skip
 
     def is_immovable(self):
         return self.immovable

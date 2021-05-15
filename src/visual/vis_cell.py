@@ -22,14 +22,20 @@ class vis_cell(pygame.sprite.Sprite):
     def check_click(self, mouse):
         if self.rect.collidepoint(mouse) and self.mask.get_at(self.local_coords(mouse)) == 1:
             if self.unit is None:
-                for line in self.map.get_cells():
-                    for cell in line:
-                        if cell.vis_cell.get_unit() is not None and cell.vis_cell.get_unit().moving() is True\
-                                and cell.vis_cell.get_unit().is_immovable() is False:
-                            self.set_unit(cell.vis_cell.get_unit())
-                            self.unit.set_move(False)
-                            self.unit.set_skip(True)
-                            cell.vis_cell.set_unit(None)
+                x, y = self.map.get_coords(self)
+                for cell in self.map.neighbours(x, y):
+                    if cell.vis_cell.get_unit() is not None and cell.vis_cell.get_unit().moving() is True\
+                            and cell.vis_cell.get_unit().is_immovable() is False:
+                        self.set_unit(cell.vis_cell.get_unit())
+                        self.unit.set_move(False)
+                        cell.vis_cell.set_unit(None)
+                        break
+            else:
+                self.unit.set_move(True)
+            for line in self.map.get_cells():
+                for cell in line:
+                    if cell.vis_cell.get_unit() is not None and cell.vis_cell != self:
+                        cell.vis_cell.get_unit().set_move(False)
 
     def check_right_click(self, mouse):
         pass

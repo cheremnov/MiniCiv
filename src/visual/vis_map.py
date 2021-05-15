@@ -74,20 +74,38 @@ class vis_map:
     def get_cells(self):
         return self.cells
 
+    def get_coords(self, cell):
+        i = 0
+        for line in self.cells:
+            j = 0
+            for next_cell in line:
+                if cell == next_cell.vis_cell:
+                    return i, j
+                j = j + 1
+            i = i + 1
+        return -1, -1
+
     def neighbours(self, x, y):
         cells = []
-        if y > 1:
-            cells.append(self.cells[x][y - 2])
-        if y < self.y - 2:
-            cells.append(self.cells[x][y + 2])
-        if x > 0 and y > 0:
-            cells.append(self.cells[x - 1][y - 1])
-        if x > 0 and y < self.y - 1:
-            cells.append(self.cells[x - 1][y + 1])
-        if x < self.x - 1 and y > 0:
-            cells.append(self.cells[x + 1][y - 1])
-        if x < self.x - 1 and y < self.y - 1:
-            cells.append(self.cells[x + 1][y + 1])
+        coords = []
+        if x % 2 == 0:
+            coords.append((x - 2, y))
+            coords.append((x + 2, y))
+            coords.append((x - 1, y - 1))
+            coords.append((x - 1, y))
+            coords.append((x + 1, y - 1))
+            coords.append((x + 1, y))
+        else:
+            coords.append((x - 2, y))
+            coords.append((x + 2, y))
+            coords.append((x - 1, y))
+            coords.append((x - 1, y + 1))
+            coords.append((x + 1, y))
+            coords.append((x + 1, y + 1))
+        for x_i, y_i in coords:
+            if 0 <= x_i < len(self.cells):
+                if 0 <= y_i < len(self.cells[x_i]):
+                    cells.append(self.cells[x_i][y_i])
         return cells
 
     def set_moving(self, moving):
