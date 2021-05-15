@@ -1,23 +1,16 @@
 import pygame
+from src.visual.vis_object import vis_object
 
 BLACK = (0, 0, 0)
 
 
-class vis_cell(pygame.sprite.Sprite):
+class vis_cell(vis_object):
     def __init__(self, x, y, cell_img, map):
-        pygame.sprite.Sprite.__init__(self)
-        self.image = cell_img
-        self.image.set_colorkey(BLACK)
-        self.mask = pygame.mask.from_surface(self.image)
-        self.rect = self.image.get_rect()
-        self.rect.center = (x, y)
+        vis_object.__init__(self, x, y, cell_img)
         self.map = map
         self._layer = 1
         self.count = 0
         self.unit = None
-
-    def local_coords(self, point):
-        return point[0] - self.rect.left, point[1] - self.rect.top
 
     def check_click(self, mouse):
         if self.rect.collidepoint(mouse) and self.mask.get_at(self.local_coords(mouse)) == 1:
@@ -36,15 +29,6 @@ class vis_cell(pygame.sprite.Sprite):
                 for cell in line:
                     if cell.vis_cell.get_unit() is not None and cell.vis_cell != self:
                         cell.vis_cell.get_unit().set_move(False)
-
-    def check_right_click(self, mouse):
-        pass
-
-    def check_right_release(self, mouse):
-        pass
-
-    def check_motion(self, rel):
-        pass
 
     def x_size(self):
         return self.rect.right - self.rect.left

@@ -1,34 +1,15 @@
 import pygame
+from src.visual.vis_object import vis_object
 
 BLACK = (0, 0, 0)
 
 
-class vis_unit(pygame.sprite.Sprite):
+class vis_unit(vis_object):
     def __init__(self, unit_img):
-        pygame.sprite.Sprite.__init__(self)
-        self.image = unit_img
-        self.image.set_colorkey(BLACK)
-        self.mask = pygame.mask.from_surface(self.image)
-        self.rect = self.image.get_rect()
-        self.rect.center = (0, 0)
+        vis_object.__init__(self, 0, 0, unit_img)
         self.move = False
         self.immovable = False
         self._layer = 2
-
-    def local_coords(self, point):
-        return point[0] - self.rect.left, point[1] - self.rect.top
-
-    def check_click(self, mouse):
-        pass
-
-    def check_right_click(self, mouse):
-        pass
-
-    def check_right_release(self, mouse):
-        pass
-
-    def check_motion(self, rel):
-        pass
 
     def set_center(self, x, y):
         self.rect.center = (x, y)
