@@ -10,7 +10,7 @@ class vis_button(vis_object):
     def __init__(self, x, y, text, button_img, font=None):
         vis_object.__init__(self, x, y, button_img)
         self.text = text
-        self._layer = 3
+        self._layer = 4
         if font is None:
             font = pg.freetype.SysFont('Comic Sans MS', 16)
         self.font = font

@@ -1,4 +1,3 @@
-import pygame as pg
 from src.visual.vis_object import vis_object
 
 BLACK = (0, 0, 0)

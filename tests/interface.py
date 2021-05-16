@@ -33,6 +33,13 @@ def reset_map():
     gamemap = generate_map(30, 10, game_folder)
     global global_frame
     global_frame.map = gamemap
+    all_sprites.remove_sprites_of_layer(1)
+    all_sprites.remove_sprites_of_layer(2)
+    for line in gamemap.get_cells():
+        for cell in line:
+            all_sprites.add(cell.vis_cell)
+            if cell.vis_cell.unit is not None:
+                all_sprites.add(cell.vis_cell.unit)
 
 
 pygame.init()
@@ -70,7 +77,7 @@ button_img = pygame.image.load(os.path.join(game_folder, 'res/frame_button1.png'
 blue_score_button = vis_button(740, 310, 'Blue Score', button_img)
 all_sprites.add(blue_score_button)
 
-frame_img = pygame.image.load(os.path.join(game_folder, 'res/frame_global4.png')).convert()
+frame_img = pygame.image.load(os.path.join(game_folder, 'res/frame_global5.png')).convert()
 global_frame = vis_frame(360, 325, frame_img, gamemap)
 all_sprites.add(global_frame)
 
@@ -81,6 +88,12 @@ button_img = pygame.image.load(os.path.join(game_folder, 'res/frame_button1.png'
 exit_button = vis_button(740, 115, 'Exit', button_img)
 exit_button.action = exit
 all_sprites.add(exit_button)
+
+for line in gamemap.get_cells():
+    for cell in line:
+        all_sprites.add(cell.vis_cell)
+        if cell.vis_cell.unit is not None:
+            all_sprites.add(cell.vis_cell.unit)
 
 while running:
     clock.tick(FPS)
@@ -109,14 +122,6 @@ while running:
     all_sprites.update()
 
     screen.fill(BLACK)
-    all_sprites.remove_sprites_of_layer(1)
-    all_sprites.remove_sprites_of_layer(2)
-    for line in gamemap.get_cells():
-        for cell in line:
-            if global_frame.rect.contains(cell.vis_cell.rect):
-                all_sprites.add(cell.vis_cell)
-                if cell.vis_cell.unit is not None:
-                    all_sprites.add(cell.vis_cell.unit)
     all_sprites.draw(screen)
     pygame.display.flip()
 
