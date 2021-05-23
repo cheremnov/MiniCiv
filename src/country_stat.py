@@ -58,6 +58,9 @@ class Country_stat:
             unit.set_hp(10)
             unit.set_income(-5)
             unit.set_speed(3)
+            unit.add_possible_cell("ice")
+            unit.add_possible_cell("plains")
+            unit.add_possible_cell("desert")
             self.add_unit(unit)
 
     def add_unit(self, unit):

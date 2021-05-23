@@ -23,7 +23,9 @@ class vis_cell(vis_object):
             if self.unit is None:
                 for cell in self.map.neighbours(x, y):
                     if cell.vis_cell.get_unit() is not None and cell.vis_cell.get_unit().moving() is True\
-                            and cell.vis_cell.get_unit().is_immovable() is False:
+                            and cell.vis_cell.get_unit().is_immovable() is False\
+                            and cell.vis_cell.get_unit().get_unit().is_possible_cell\
+                                (self.map.get_cell(x, y).get_terrain()):
                         self.set_unit(cell.vis_cell.get_unit())
                         self.get_unit().get_unit().add_traveled_cells()
                         self.get_unit().get_unit().set_cell((x, y))

@@ -86,6 +86,9 @@ class vis_map:
             i = i + 1
         return -1, -1
 
+    def get_cell(self, x, y):
+        return self.cells[x][y]
+
     def neighbours(self, x, y):
         cells = []
         coords = []

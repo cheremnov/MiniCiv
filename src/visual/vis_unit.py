@@ -12,6 +12,7 @@ class vis_unit(vis_object):
         self.move = False
         self.immovable = False
         self._layer = 2
+        self.unit = None
 
     def set_center(self, x, y):
         self.rect.center = (x, y)
