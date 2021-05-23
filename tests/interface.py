@@ -1,10 +1,6 @@
 import pygame
 import os
 import sys
-from tkinter import (
-                     Tk,
-                     messagebox
-                    )
 sys.path.append(os.path.normpath(os.path.join
                 (os.path.dirname(os.path.abspath(__file__)), '..')))
 
@@ -39,7 +35,18 @@ def create_messagebox(title, text):
 
 def end_turn():
     global game_state
+    global red_score_button
+    global blue_score_button
+    global turn_button
     game_state.end_turn()
+    red_resources = game_state.get_countries()["red"].get_resources()
+    red_score_button.set_text(f"Red: {red_resources}")
+    blue_resources = game_state.get_countries()["blue"].get_resources()
+    blue_score_button.set_text(f"Blue: {blue_resources}")
+    if blue_resources > red_resources:
+        turn_button.set_text("Blue turn")
+    else:
+        turn_button.set_text("Red turn")
 
 
 def exit():
@@ -63,20 +70,9 @@ def reset_map():
     game_state.set_sprites(all_sprites)
 
 
-def show_red_score():
-    red_resources = game_state.get_countries()["red"].get_resources()
-    create_messagebox("OK",
-                      f"Red resources: {red_resources}\n")
+def do_nothing():
+    pass
 
-
-def show_blue_score():
-    blue_resources = game_state.get_countries()["blue"].get_resources()
-    create_messagebox("OK",
-                      f"Blue resources: {blue_resources}\n")
-
-
-# Use Tkinter for the messagebox
-Tk().wm_withdraw()
 
 pygame.init()
 pygame.font.init()
@@ -95,7 +91,6 @@ cursor = vis_cursor(cursor_img)
 all_sprites.add(cursor)
 
 game_state = Game_state()
-# TODO: Implement map scrolling
 game_state.set_gamemap(generate_map(game_state, 20, 7, game_folder))
 
 button_img = pygame.image.load(os.path.join(game_folder, 'res/frame_button1.png')).convert()
@@ -109,14 +104,19 @@ end_turn_button.action = end_turn
 all_sprites.add(end_turn_button)
 
 button_img = pygame.image.load(os.path.join(game_folder, 'res/frame_button1.png')).convert()
-red_score_button = vis_button(740, 245, 'Red Score', button_img)
-red_score_button.action = show_red_score
+red_score_button = vis_button(740, 245, 'Red: 100', button_img)
+red_score_button.action = do_nothing
 all_sprites.add(red_score_button)
 
 button_img = pygame.image.load(os.path.join(game_folder, 'res/frame_button1.png')).convert()
-blue_score_button = vis_button(740, 310, 'Blue Score', button_img)
-blue_score_button.action = show_blue_score
+blue_score_button = vis_button(740, 310, 'Blue: 100', button_img)
+blue_score_button.action = do_nothing
 all_sprites.add(blue_score_button)
+
+button_img = pygame.image.load(os.path.join(game_folder, 'res/frame_button1.png')).convert()
+turn_button = vis_button(740, 375, 'Red turn', button_img)
+turn_button.action = do_nothing
+all_sprites.add(turn_button)
 
 frame_img = pygame.image.load(os.path.join(game_folder, 'res/frame_global5.png')).convert()
 global_frame = vis_frame(360, 325, frame_img, game_state.get_gamemap())

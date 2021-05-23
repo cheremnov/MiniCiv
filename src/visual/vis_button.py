@@ -27,3 +27,10 @@ class vis_button(vis_object):
     def draw_text(self):
         self.textsurface, _ = self.font.render(self.text, (0, 0, 0))
         self.image.blit(self.textsurface, (10, 25))
+
+    def set_text(self, text):
+        label, _ = self.font.render(self.text, 0, WHITE)
+        self.image.blit(label, (10, 25))
+        self.text = text
+        self.textsurface, _ = self.font.render(self.text, (1, 1, 1))
+        self.image.blit(self.textsurface, (10, 25))
