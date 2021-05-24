@@ -23,30 +23,22 @@ BLUE = (0, 0, 255)
 game_folder = os.path.normpath(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..'))
 
 
-def create_messagebox(title, text):
-    # WARNING: This messagebox gets the cursor out of
-    # the pygame focus. Buttons become unavailable,
-    # till you click on the pygame window again.
-    root = Tk()
-    root.withdraw()
-    messagebox.showinfo(title, text)
-    root.destroy()
-
-
 def end_turn():
     global game_state
     global red_score_button
     global blue_score_button
     global turn_button
+    global turn
     game_state.end_turn()
     red_resources = game_state.get_countries()["red"].get_resources()
     red_score_button.set_text(f"Red: {red_resources}")
     blue_resources = game_state.get_countries()["blue"].get_resources()
     blue_score_button.set_text(f"Blue: {blue_resources}")
-    if blue_resources > red_resources:
+    if turn % 2 == 0:
         turn_button.set_text("Blue turn")
     else:
         turn_button.set_text("Red turn")
+    turn = turn + 1
 
 
 def exit():
@@ -137,6 +129,7 @@ for line in game_state.get_gamemap().get_cells():
             all_sprites.add(cell.vis_cell.unit)
 
 game_state.set_sprites(all_sprites)
+turn = 0
 
 while running:
     clock.tick(FPS)
