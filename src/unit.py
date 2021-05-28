@@ -138,3 +138,6 @@ class Unit:
     def end_turn(self):
         self.attacks = 0
         self.traveled_cells = 0
+
+    def get_vis_unit(self):
+        return self.vis_unit

@@ -178,14 +178,18 @@ def generate_map(game_state: Game_state,
                                         (game_folder, 'res/townhall_red.png')).convert()
     townhall_blue_img = pygame.image.load(os.path.join
                                          (game_folder, 'res/townhall_blue.png')).convert()
+    townhall_attacked = pygame.image.load(os.path.join
+                                          (game_folder, 'res/townhall_attacked.png')).convert()
     for building in red_stat.get_buildings():
         building.add_vis_unit(townhall_red_img)
+        building.get_vis_unit().set_attacked(townhall_attacked)
         building_cell = building.get_cell()
         gamemap.get_cells()[building_cell[0]][building_cell[1]].\
             vis_cell.set_unit(building.vis_unit)
         building.vis_unit.set_immovable(True)
     for building in blue_stat.get_buildings():
         building.add_vis_unit(townhall_blue_img)
+        building.get_vis_unit().set_attacked(townhall_attacked)
         building_cell = building.get_cell()
         gamemap.get_cells()[building_cell[0]][building_cell[1]].\
             vis_cell.set_unit(building.vis_unit)
@@ -195,13 +199,17 @@ def generate_map(game_state: Game_state,
                                      (game_folder, 'res/spearman_red.png')).convert()
     spearman_blue_img = pygame.image.load(os.path.join
                                      (game_folder, 'res/spearman_blue.png')).convert()
+    spearman_attacked = pygame.image.load(os.path.join
+                                     (game_folder, 'res/spearman_attacked.png')).convert()
     for unit in red_stat.get_units():
         unit.add_vis_unit(spearman_red_img)
+        unit.get_vis_unit().set_attacked(spearman_attacked)
         unit_cell = unit.get_cell()
         gamemap.get_cells()[unit_cell[0]][unit_cell[1]].\
             vis_cell.set_unit(unit.vis_unit)
     for unit in blue_stat.get_units():
         unit.add_vis_unit(spearman_blue_img)
+        unit.get_vis_unit().set_attacked(spearman_attacked)
         unit_cell = unit.get_cell()
         gamemap.get_cells()[unit_cell[0]][unit_cell[1]].\
             vis_cell.set_unit(unit.vis_unit)

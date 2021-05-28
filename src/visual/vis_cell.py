@@ -1,4 +1,3 @@
-import pygame
 from src.visual.vis_object import vis_object
 from src.visual.vis_unit import attack_unit
 
@@ -87,8 +86,3 @@ class vis_cell(vis_object):
 
     def get_unit(self):
         return self.unit
-
-    def update_image(self, cell_img):
-        self.image = cell_img
-        self.image.set_colorkey(BLACK)
-        self.mask = pygame.mask.from_surface(self.image)

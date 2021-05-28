@@ -157,6 +157,8 @@ class Game:
         while self.running:
             self.clock.tick(self.fps)
             all_sprites = self.game_state.get_sprites()
+            for sprite in all_sprites:
+                sprite.check()
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     self.running = False

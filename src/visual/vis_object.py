@@ -26,3 +26,14 @@ class vis_object(pg.sprite.Sprite):
 
     def check_motion(self, rel, master = None):
         pass
+
+    def check(self, master = None):
+        pass
+
+    def update_image(self, img):
+        self.image = img
+        self.image.set_colorkey(BLACK)
+        self.mask = pg.mask.from_surface(self.image)
+
+    def get_image(self):
+        return self.image

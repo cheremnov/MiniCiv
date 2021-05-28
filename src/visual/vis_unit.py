@@ -1,3 +1,4 @@
+import time
 from src.visual.vis_object import vis_object
 
 BLACK = (0, 0, 0)
@@ -13,6 +14,14 @@ class vis_unit(vis_object):
         self.immovable = False
         self._layer = 2
         self.unit = None
+        self.attacked = None
+        self.return_image = False
+
+    def check(self, master = None):
+        if self.return_image is True:
+            time.sleep(0.1)
+            self.update_image(self.tmp_img)
+            self.return_image = False
 
     def set_center(self, x, y):
         self.rect.center = (x, y)
@@ -35,14 +44,26 @@ class vis_unit(vis_object):
         # Warning: Circular reference
         self.unit = unit
 
+    def set_attacked(self, img):
+        self.attacked = img
+
+    def get_attacked(self):
+        return self.attacked
+
     def get_unit(self):
         return self.unit
 
+    def update_attacked(self):
+        if self.attacked is None:
+            return
+        self.tmp_img = self.image
+        self.update_image(self.attacked)
+        self.return_image = True
+
 
 def attack_unit(game_state, attacking_unit, defending_unit):
-    print(f"{attacking_unit.get_country()} unit attacked "
-          f"{defending_unit.get_country()} unit")
     attacking_unit.add_attack()
+    defending_unit.get_vis_unit().update_attacked()
     defending_unit.set_hp_after_attack(game_state,
                                        attacking_unit)
     if defending_unit.get_cur_hp() > 0:
