@@ -132,6 +132,8 @@ class Game:
                     all_sprites.add(cell.vis_cell.unit)
         master.turn = 0
         master.turn_button.set_text("Red turn")
+        master.red_score_button.set_text("Red: 100")
+        master.blue_score_button.set_text("Blue: 100")
         # return frame to its original state after possible win
         all_sprites.remove_sprites_of_layer(3);
         frame_img = pygame.image.load(os.path.join(self.game_folder, 'res/frame_global5.png')).convert()
