@@ -180,7 +180,7 @@ class Game:
             # If one side has been defeated show the message about that above map
             countries = self.game_state.get_countries()
             for country in countries:
-                if len(countries[country].get_buildings()) == 0:
+                if len(countries[country].get_buildings()) == 0 or countries[country].get_resources() < 0:
                     self.global_frame.set_text(country + ' defeated!', self.colors[country])
 
             self.game_state.get_sprites().update()
