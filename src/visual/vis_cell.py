@@ -60,6 +60,7 @@ class vis_cell(vis_object):
                             else:
                                 print("Unit can't attack")
                             attacking_unit.set_move(False)
+                            attacking_unit.get_unit().stop()
                             break
 
             for line in self.map.get_cells():

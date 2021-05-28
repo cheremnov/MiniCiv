@@ -132,6 +132,9 @@ class Unit:
     def get_traveled_cells(self):
         return self.traveled_cells
 
+    def stop(self):
+        self.traveled_cells = self.speed
+
     def end_turn(self):
         self.attacks = 0
         self.traveled_cells = 0
