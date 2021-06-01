@@ -7,14 +7,14 @@ WHITE = (255, 255, 255)
 
 
 class vis_button(vis_object):
-    def __init__(self, x, y, text, button_img, font=None):
+    def __init__(self, x, y, text, button_img, color=(1, 1, 1), font=None):
         vis_object.__init__(self, x, y, button_img)
         self.text = text
         self._layer = 4
         if font is None:
             font = pg.freetype.SysFont('Comic Sans MS', 16)
         self.font = font
-        self.textsurface, _ = font.render(text, (1, 1, 1))
+        self.textsurface, _ = font.render(text, color)
         self.image.blit(self.textsurface, (10, 25))
 
     def check_click(self, mouse, master = None):
@@ -31,9 +31,9 @@ class vis_button(vis_object):
         self.textsurface, _ = self.font.render(self.text, (0, 0, 0))
         self.image.blit(self.textsurface, (10, 25))
 
-    def set_text(self, text):
+    def set_text(self, text, color=(1, 1, 1)):
         label, _ = self.font.render(self.text, 0, WHITE)
         self.image.blit(label, (10, 25))
         self.text = text
-        self.textsurface, _ = self.font.render(self.text, (1, 1, 1))
+        self.textsurface, _ = self.font.render(self.text, color)
         self.image.blit(self.textsurface, (10, 25))

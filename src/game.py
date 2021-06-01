@@ -71,7 +71,7 @@ class Game:
         all_sprites.add(self.blue_score_button)
 
         button_img = pygame.image.load(os.path.join(self.game_folder, 'res/frame_button1.png')).convert()
-        self.turn_button = vis_button(740, 375, 'Red turn', button_img)
+        self.turn_button = vis_button(740, 375, 'Red turn', button_img, RED)
         self.turn_button.action = self.do_nothing
         all_sprites.add(self.turn_button)
 
@@ -105,9 +105,9 @@ class Game:
         blue_resources = master.game_state.get_countries()["blue"].get_resources()
         master.blue_score_button.set_text(f"Blue: {blue_resources}")
         if master.turn % 2 == 0:
-            master.turn_button.set_text("Blue turn")
+            master.turn_button.set_text("Blue turn", BLUE)
         else:
-            master.turn_button.set_text("Red turn")
+            master.turn_button.set_text("Red turn", RED)
         master.turn = master.turn + 1
 
     def exit(self, master):
@@ -131,7 +131,7 @@ class Game:
                 if cell.vis_cell.unit is not None:
                     all_sprites.add(cell.vis_cell.unit)
         master.turn = 0
-        master.turn_button.set_text("Red turn")
+        master.turn_button.set_text("Red turn", RED)
         master.red_score_button.set_text("Red: 100")
         master.blue_score_button.set_text("Blue: 100")
         # return frame to its original state after possible win
