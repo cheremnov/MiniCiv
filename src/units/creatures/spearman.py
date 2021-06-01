@@ -6,7 +6,7 @@ class Spearman(Creature):
         super().__init__()
         self.hp = 10
         self.cur_hp = 10
-        self.moves = 2
-        self.cur_moves = 2
-        self.damage = 3
-        self.income = -2
+        self.damage = 2
+        self.income = -5
+        self.speed = 3
+        self.possible_cells = set(["ice", "plains", "desert"])

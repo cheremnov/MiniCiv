@@ -1,5 +1,5 @@
 import random
-from src.unit import Unit
+from src.units.creatures.spearman import Spearman
 from src.units.buildings.town_hall import Town_hall
 
 
@@ -51,16 +51,9 @@ class Country_stat:
                 if not vis_map.in_bounds(spawn_loc[0], spawn_loc[1]):
                     spawn_loc = self.capital
 
-            unit = Unit()
+            unit = Spearman()
             unit.set_cell((spawn_loc[0], spawn_loc[1]))
             unit.set_country(self.name)
-            unit.set_damage(2)
-            unit.set_hp(10)
-            unit.set_income(-5)
-            unit.set_speed(3)
-            unit.add_possible_cell("ice")
-            unit.add_possible_cell("plains")
-            unit.add_possible_cell("desert")
             self.add_unit(unit)
 
     def add_unit(self, unit):
