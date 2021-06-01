@@ -35,13 +35,10 @@ class Country_stat:
         This function requires:
         1) The nation must have the capital
         '''
+        neighbours = vis_map.neighbours(self.capital[0], self.capital[1])
         possible_spawns = set()
-        for x in range(self.capital[0] - spawn_area_size,
-                       self.capital[0] + spawn_area_size):
-            for y in range(self.capital[1] - spawn_area_size,
-                           self.capital[1] + spawn_area_size):
-                possible_spawns.add((x, y))
-        possible_spawns.discard(self.capital)
+        for cell in neighbours:
+            possible_spawns.add((cell.X(), cell.Y()))
         for unit_idx in range(units_num):
             if len(possible_spawns) == 0:
                 spawn_loc = self.capital

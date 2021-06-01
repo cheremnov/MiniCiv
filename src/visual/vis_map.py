@@ -151,9 +151,9 @@ def generate_map(game_state: Game_state,
 
     red_capital_coords = (random.randint(1, x - 2), random.randint(1, y - 2))
     blue_capital_coords = (random.randint(1, x - 2), random.randint(1, y - 2))
-    while -2 <= red_capital_coords[0] - blue_capital_coords[0] <= 2 and\
-          -2 <= red_capital_coords[1] - blue_capital_coords[1] <= 2:
-        blue_capital_coords = (random.randint(0, x - 1), random.randint(1, y - 2))
+    while -4 <= red_capital_coords[0] - blue_capital_coords[0] <= 4 and\
+          -4 <= red_capital_coords[1] - blue_capital_coords[1] <= 4:
+        blue_capital_coords = (random.randint(1, x - 1), random.randint(1, y - 2))
     
     red_stat.set_capital(red_capital_coords, gamemap)
     blue_stat.set_capital(blue_capital_coords, gamemap)
