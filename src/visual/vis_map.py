@@ -1,3 +1,4 @@
+"""Visual map."""
 import random
 import pygame
 import os
@@ -16,13 +17,23 @@ BLUE = (0, 0, 255)
 
 
 class vis_map:
+    """Represent game map."""
+
     def __init__(self):
+        """Initialise game map."""
         self.cells = []
         self.x = 0
         self.y = 0
         self.moving = False
 
     def set_size(self, x, y):
+        """Set map size.
+
+        Args:
+            - x - x size
+            - y - y size
+
+        """
         assert(0 < x and 0 < y)
         self.x = x
         self.y = y
@@ -45,6 +56,7 @@ class vis_map:
             self.cells.append(list)
 
     def gen_terrain(self):
+        """Generate map terrain."""
         for i in range(0, len(self.cells)):
             for j in range(0, len(self.cells[i])):
                 if i < 2 or i > self.x - 3:
@@ -56,9 +68,15 @@ class vis_map:
                 self.cells[i][j].update_vis_cell()
 
     def gen_water(self, banned_cells):
-        ''' Capitals can't be under-water, as well as units
-        Water is generated randomly, 5% of the map is water
-        '''
+        """Generate water cells.
+
+        Capitals can't be under-water, as well as units.
+        Water is generated randomly, 5% of the map is water.
+
+        Args:
+            - banned_cells - cells, where water can not be
+
+        """
         possible_water_tiles = set()
         for i in range(0, len(self.cells)):
             for j in range(0, len(self.cells[i])):
@@ -73,9 +91,24 @@ class vis_map:
             self.cells[water_tile[0]][water_tile[1]].update_vis_cell()
 
     def get_cells(self):
+        """Get map's cells.
+
+        Returns:
+            - output - map's cells
+
+        """
         return self.cells
 
     def get_coords(self, cell):
+        """Get cell's coordinates.
+
+        Args:
+            - cell - cell, which coordinates will be returned
+
+        Returns:
+            - output - cell's coordinates
+
+        """
         i = 0
         for line in self.cells:
             j = 0
@@ -87,9 +120,29 @@ class vis_map:
         return -1, -1
 
     def get_cell(self, x, y):
+        """Get cell by coordinates.
+
+        Args:
+            - x - x coordinate
+            - y - y coordinate
+
+        Returns:
+            - output - cell with x, y coordinates
+
+        """
         return self.cells[x][y]
 
     def neighbours(self, x, y):
+        """Get cell's neighbours.
+
+        Args:
+            - x - cell's x coordinate
+            - y - cell's y coordinate
+
+        Returns:
+            - output - cell's neighbours
+
+        """
         cells = []
         coords = []
         if x % 2 == 0:
@@ -113,34 +166,80 @@ class vis_map:
         return cells
 
     def set_moving(self, moving):
+        """Start map motion.
+
+        Args:
+            - moving - True to start motion, False to end
+
+        """
         self.moving = moving
 
     def move(self, move):
+        """Make map motion.
+
+        Args:
+            - moving - move coordinates
+
+        """
         if self.moving is True:
             for line in self.cells:
                 for cell in line:
                     cell.vis_cell.move(move)
 
     def in_bounds(self, cell_x, cell_y):
+        """Check is cell with x, y coordinates exists.
+
+        Args:
+            - cell_x - cell's x coordinate
+            - cell_y - cell's y coordinate
+
+        Returns:
+            - output - True if cell exists, False otherwise
+
+        """
         return (0 <= cell_x < len(self.cells) and 0 <= cell_y < len(
             self.cells[cell_x]))
 
     def set_gamestate(self, game_state):
+        """Set game state.
+
+        Args:
+            - game_state - game state
+
+        """
         self.game_state = game_state
 
     def get_gamestate(self):
+        """Get game state.
+
+        Returns:
+            - output - game state
+
+        """
         return self.game_state
 
     def end_turn(self):
+        """End turn."""
         pass
 
 
 def generate_map(game_state: Game_state,
                  x: int, y: int, game_folder: str) -> vis_map:
-    '''
+    """Generate map.
+
     Currently assume that every map is generated via this function.
     Any other map generation function must save the game state.
-    '''
+
+    Args:
+        - game_state - current game state
+        - x - x map size
+        - y - y map size
+        - game_folder - game folder
+
+    Returns:
+        - output - game map
+
+    """
     gamemap = vis_map()
     gamemap.set_size(x, y)
     gamemap.gen_terrain()
