@@ -1,3 +1,4 @@
+"""Visual button."""
 import pygame as pg
 import pygame.freetype
 from src.visual.vis_object import vis_object
@@ -7,7 +8,20 @@ WHITE = (255, 255, 255)
 
 
 class vis_button(vis_object):
+    """Represent button."""
+
     def __init__(self, x, y, text, button_img, color=(1, 1, 1), font=None):
+        """Initialise vis_button.
+
+        Args:
+            - x - x coordinate
+            - y - y coordinate
+            - text - button text
+            - button_img - button image
+            - color - button text color
+            - font - text font
+
+        """
         vis_object.__init__(self, x, y, button_img)
         self.text = text.split('\n')
         self._layer = 4
@@ -24,6 +38,13 @@ class vis_button(vis_object):
                             self.textcoords[1] + i * self.linestep))
 
     def check_click(self, mouse, master=None):
+        """React on left mouse button click.
+
+        Args:
+            - mouse - mouse click info
+            - master - current game
+
+        """
         if self.rect.collidepoint(mouse) and \
                 self.mask.get_at(self.local_coords(mouse)) == 1:
             if master is not None:
@@ -32,13 +53,27 @@ class vis_button(vis_object):
                 self.action()
 
     def action(self, master=None):
+        """Base action on button click.
+
+        Args:
+            - master - current game
+
+        """
         print('NOT IMPLEMENTED YET')
 
     def draw_text(self):
+        """Draw button text."""
         self.textsurface, _ = self.font.render(self.text, (0, 0, 0))
         self.image.blit(self.textsurface, (10, 25))
 
     def set_text(self, text, color=(1, 1, 1)):
+        """Set text to button.
+
+        Args:
+            - text - text, that will be set
+            - color - text color
+
+        """
         lines = text.count('\n')
         delta = 0 if lines == 0 else lines * self.linestep - self.linestep // 2
         self.textcoords = (10, 25 - delta)
