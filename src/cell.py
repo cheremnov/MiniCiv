@@ -1,9 +1,12 @@
+"""Cell."""
 import os
 import pygame
 from src.visual.vis_cell import vis_cell
 
 
 class Cell:
+    """Represents cell."""
+
     # Relative to the main folder
     TERRAIN_IMAGES = {"ice": "res/ice-hex.png",
                       "plains": "res/plains-hex.png",
@@ -11,26 +14,65 @@ class Cell:
                       "water": "res/water-hex.png"}
 
     def __init__(self, x, y, terrain):
+        """Initialise cell.
+
+        Args:
+            - x - x coordinate
+            - y - y coordinate
+            - terrain - cell's terrain
+
+        """
         self.x = x
         self.y = y
         self.terrain = terrain
         self.vis_cell = None
 
     def set_terrain(self, terrain):
+        """Set cell's terrain.
+
+        Args:
+            - terrain - terrain, that will be set
+
+        """
         self.terrain = terrain
 
     def get_terrain(self):
+        """Get cell's terrain.
+
+        Returns:
+            - output - cell's terrain
+
+        """
         return self.terrain
 
     def X(self):
+        """Get cell's x coordinate.
+
+        Returns:
+            - output - cell's x coordinate
+
+        """
         return self.x
 
     def Y(self):
+        """Get cell's y coordinate.
+
+        Returns:
+            - output - cell's y coordinate
+
+        """
         return self.y
 
     def create_vis_cell(self, vis_cell_coords, vis_map):
-        ''' At start a cell always lacks terrain
-        '''
+        """Create cell's sprite.
+
+        At start a cell always lacks terrain.
+
+        Args:
+            - vis_cell_coords - coordinates of sprite
+            - vis_map - game map
+
+        """
         # TODO: Properly get info about the game folder
         game_folder = os.path.normpath(os.path.join
                                        (os.path.dirname
@@ -42,6 +84,7 @@ class Cell:
                                  cell_img, vis_map)
 
     def update_vis_cell(self):
+        """Update cell's sprite."""
         assert(self.vis_cell is not None)
         # TODO: Properly get info about the game folder
         game_folder = os.path.normpath(os.path.join
