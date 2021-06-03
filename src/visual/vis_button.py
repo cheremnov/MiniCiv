@@ -53,7 +53,7 @@ class vis_button(vis_object):
                 self.action()
 
     def action(self, master=None):
-        """Base action on button click.
+        """Set action on button click.
 
         Args:
             - master - current game

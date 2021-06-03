@@ -1,9 +1,12 @@
+"""Spearman."""
 from src.units.creature import Creature
 
 
 class Spearman(Creature):
+    """Represent spearman."""
 
     def __init__(self):
+        """Initialise spearman."""
         super().__init__()
         self.hp = 10
         self.cur_hp = 10

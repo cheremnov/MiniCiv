@@ -1,10 +1,13 @@
+"""Town hall."""
 from src.units.building import Building
 from src.units.creatures.spearman import Spearman
 
 
 class Town_hall(Building):
+    """Represent town hall."""
 
     def __init__(self):
+        """Initialise town hall."""
         super().__init__()
         self.hp = 20
         self.cur_hp = 20
