@@ -31,7 +31,8 @@ class Unit:
         7) country - country, which unit belongs to
         8) vis_unit - object, that represents unit on map
         9) possible_cells - types of cells, which unit can traverse
-        10) produced_units - types of units, which can be produces by unit (in work)
+        10) produced_units - types of units, which can be
+            produces by unit (in work)
         11) attacks - number of attacks, that unit caused that turn
         12) traveled_cells - number of cells, travelled by unit that turn
 

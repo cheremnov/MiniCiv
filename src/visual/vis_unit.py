@@ -81,7 +81,8 @@ class vis_unit(vis_object):
         """Make unit immovable.
 
         Args:
-            - immovable - True to make unit immovable, False to make unit movable
+            - immovable - True to make unit immovable, False to
+              make unit movable
 
         """
         self.immovable = immovable

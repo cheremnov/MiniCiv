@@ -60,7 +60,8 @@ class Country_stat:
 
         Args:
             - units_num - number of generated units
-            - spawn_area_size - size of area near capital, where units can spawn (in work)
+            - spawn_area_size - size of area near capital, where
+              units can spawn (in work)
             - vis_map - game map
 
         """
