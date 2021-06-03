@@ -1,3 +1,4 @@
+"""Game."""
 import pygame
 import os
 import gettext
@@ -19,17 +20,26 @@ gettext.install('game', os.path.join(os.path.dirname
 
 
 class Game:
+    """Represents game process."""
+
     def __init__(self, width, height, fps):
-        '''
-        Initialize common game context. The game context consists of:
-         * game_folder == folder with game resources;
-         * clock;
-         * fps == fps for clock;
-         * screen == main screen to where everything blits;
-         * game_state == specific game context;
-         * reset_map, end_turn, both scores, turn and exit buttons;
-         * turn == the number of turns already taken.
-        '''
+        """Initialize common game context.
+
+        The game context consists of:
+        1) game_folder == folder with game resources
+        2) clock
+        3) fps == fps for clock
+        4) screen == main screen to where everything blits
+        5) game_state == specific game context
+        6) reset_map, end_turn, both scores, turn and exit buttons
+        7) turn == the number of turns already taken
+
+        Args:
+            - width - screen width
+            - height - screen height
+            - fps - game fps
+
+        """
         # For now objects' placing assumes 800x650 screen
         # TODO: support custom screen
         self.game_folder = os.path.normpath(os.path.join(os.path.dirname(
@@ -116,9 +126,13 @@ class Game:
         self.turn = 0
 
     def end_turn(self, master):
-        '''
-        End current turn and start the next one.
-        '''
+        """End current turn and start the next one.
+
+        Args:
+            - master - current game
+
+        """
+        print(master)
         master.game_state.end_turn()
         red_resources = master.game_state.get_countries()["red"]\
             .get_resources()
@@ -133,15 +147,21 @@ class Game:
         master.turn = master.turn + 1
 
     def exit(self, master):
-        '''
-        Stop the game.
-        '''
+        """Stop the game.
+
+        Args:
+            - master - current game
+
+        """
         self.running = False
 
     def reset_map(self, master):
-        '''
-        Start the game from the beginning.
-        '''
+        """Start the game from the beginning.
+
+        Args:
+            - master - current game
+
+        """
         master.game_state.set_gamemap(generate_map(master.game_state, 20, 7,
                                       master.game_folder))
         master.global_frame.map = master.game_state.get_gamemap()
@@ -167,18 +187,22 @@ class Game:
         master.game_state.set_sprites(all_sprites)
 
     def do_nothing(self, master):
-        '''
-        Don't do anything.
-        '''
+        """Don't do anything.
+
+        Args:
+            - master - current game
+
+        """
         pass
 
     def mainloop(self):
-        '''
-        The main function that implements the process of the game.
+        """Implement the process of the game.
+
         Ticks clock, for every tick checks events that take place.
         For every sprite calls its handler of the actual event.
         Redraw screen and continue iterations.
-        '''
+
+        """
         while self.running:
             self.clock.tick(self.fps)
             all_sprites = self.game_state.get_sprites()
@@ -223,7 +247,5 @@ class Game:
             pygame.display.flip()
 
     def quit(self):
-        '''
-        Completely kill the game.
-        '''
+        """Completely kill the game."""
         pygame.quit()
