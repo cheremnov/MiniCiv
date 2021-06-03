@@ -29,7 +29,7 @@ class vis_unit(vis_object):
         self.return_image = False
 
     def check(self, master=None):
-        """React on left mouse button click.
+        """React every main loop iteration.
 
         Args:
             - master - current game
