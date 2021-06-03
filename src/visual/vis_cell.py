@@ -1,3 +1,4 @@
+"""Visual cell."""
 from src.visual.vis_object import vis_object
 from src.visual.vis_unit import attack_unit
 
@@ -5,7 +6,17 @@ BLACK = (0, 0, 0)
 
 
 class vis_cell(vis_object):
+    """Represent cell sprite."""
+
     def __init__(self, x, y, cell_img, map):
+        """Initialise vis_cell.
+
+        Args:
+            - x - x_coordinate
+            - y - y_coordinate
+            - cell_img - cell image
+            - map -game map
+        """
         vis_object.__init__(self, x, y, cell_img)
         self.map = map
         self._layer = 1
@@ -13,10 +24,17 @@ class vis_cell(vis_object):
         self.unit = None
 
     def check_click(self, mouse, master=None):
-        ''' Assumption in this function:
+        """React on left mouse button click.
+
+        Assumption in this function:
         1) The cells belongs to the map.
         2) Map stores the global state
-        '''
+
+        Args:
+            - mouse - mouse click info
+            - master - current game
+
+        """
         if self.rect.collidepoint(mouse) and\
                 self.mask.get_at(self.local_coords(mouse)) == 1:
             x, y = self.map.get_coords(self)
@@ -90,21 +108,51 @@ class vis_cell(vis_object):
                         cell.vis_cell.get_unit().set_move(False)
 
     def x_size(self):
+        """Get cell's x size.
+
+        Returns:
+            - output - cell's x size
+
+        """
         return self.rect.right - self.rect.left
 
     def y_size(self):
+        """Get cell's y size.
+
+        Returns:
+            - output - cell's y size
+
+        """
         return self.rect.bottom - self.rect.top
 
     def move(self, move):
+        """Move cell.
+
+        Args:
+            - move - move coordinates
+
+        """
         self.rect.center = (self.rect.center[0] + move[0],
                             self.rect.center[1] + move[1])
         if self.unit is not None:
             self.unit.set_center(self.rect.centerx, self.rect.centery)
 
     def set_unit(self, unit):
+        """Set unit to cell.
+
+        Args:
+            - unit - unit, that will be set
+
+        """
         self.unit = unit
         if self.unit is not None:
             self.unit.set_center(self.rect.centerx, self.rect.centery)
 
     def get_unit(self):
+        """Get cell's unit.
+
+        Returns:
+            - output - cell's unit
+
+        """
         return self.unit
