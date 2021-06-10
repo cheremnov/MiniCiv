@@ -148,7 +148,6 @@ class Game:
             - master - current game
 
         """
-        print(master)
         master.game_state.end_turn()
         red_resources = master.game_state.get_countries()["red"]\
             .get_resources()

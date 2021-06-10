@@ -87,6 +87,8 @@ class vis_cell(vis_object):
                             country = unit.get_unit().get_country()
                             if country != game_state.get_turn():
                                 allowed = False
+                            if self.unit.get_unit().get_country() == country:
+                                allowed = False
                         if allowed:
                             defending_unit = self.unit
                             attacking_unit = cell.vis_cell.get_unit()
