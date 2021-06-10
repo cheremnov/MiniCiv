@@ -21,41 +21,41 @@ msgstr ""
 msgid "MiniCiv"
 msgstr ""
 
-#: mini_civ/src/game.py:57
+#: mini_civ/src/game.py:77
 msgid "Reset map"
 msgstr ""
 
-#: mini_civ/src/game.py:62
+#: mini_civ/src/game.py:86
 msgid "End turn"
 msgstr ""
 
-#: mini_civ/src/game.py:67 mini_civ/src/game.py:107 mini_civ/src/game.py:138
+#: mini_civ/src/game.py:67 mini_civ/src/game.py:107 mini_civ/src/game.py:194
 msgid "Red: "
 msgstr ""
 
-#: mini_civ/src/game.py:72 mini_civ/src/game.py:109 mini_civ/src/game.py:139
+#: mini_civ/src/game.py:72 mini_civ/src/game.py:109 mini_civ/src/game.py:195
 msgid "Blue: "
 msgstr ""
 
-#: mini_civ/src/game.py:77 mini_civ/src/game.py:113 mini_civ/src/game.py:137
+#: mini_civ/src/game.py:77 mini_civ/src/game.py:113 mini_civ/src/game.py:193
 msgid "Red turn"
 msgstr ""
 
-#: mini_civ/src/game.py:88
+#: mini_civ/src/game.py:131
 msgid "Exit"
 msgstr ""
 
-#: mini_civ/src/game.py:111
+#: mini_civ/src/game.py:160
 msgid "Blue turn"
 msgstr ""
 
-#: mini_civ/src/game.py:191
+#: mini_civ/src/game.py:254
 msgid ""
 "Blue is\n"
 "defeated!"
 msgstr ""
 
-#: mini_civ/src/game.py:193
+#: mini_civ/src/game.py:258
 msgid ""
 "Red is\n"
 "defeated!"
